@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículo | Augusto de Sena</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            text-align: center;
+        }
+
+        header {
+            background: #1e1e1e;
+            padding: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            background: #333;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #7800ac;
+        }
+
+        .sections {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .section {
+            background-color: #222;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            scroll-margin-top: 80px;
+            margin-bottom: 15px;
+        }
+
+        .section h2 {
+            font-size: 26px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .section p {
+            font-size: 18px;
+            color: #ddd;
+            margin: 5px 0;
+        }
+
+        .footer {
+            background: #1e1e1e;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .footer p, .footer a {
+            color: #bbb;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #ca02e1;
+        }
+
+        .botao {
+            display: inline-block;
+            background-color: #444; /* Cor cinza */
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            border: 2px solid #444;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .botao:hover {
+            background-color: #555; /* Cinza mais claro ao passar o mouse */
+            border-color: #555;
+            transform: scale(1.05);
+        }
+
+        .botao:active {
+            background-color: #333; /* Cinza mais escuro ao clicar */
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Augusto Sena</h1>
+        <p class="prog">Programador Junior</p>
+        
+    </header>
+    
+    <nav class="nav-menu">
+        <a href="#sobre">SOBRE</a>
+        <a href="#linguagens">LINGUAGENS</a>
+        <a href="#experiencias">EXPERIÊNCIAS</a>
+        <a href="#formacoes">FORMAÇÕES</a>
+        <a href="#projetos">PROJETOS</a>
+        <a href="#contato">CONTATO</a>
+    </nav>
+    
+    <div class="sections">
+        <div class="section" id="sobre">
+            <h2>SOBRE MIM</h2>
+            <br>
+            <p>Sou uma pessoa dedicada, determinada e com espírito de liderança. <BR>Sempre busco auxiliar minha equipe e concluir os desafios que assumo.</p>
+        </div>
+        <div class="section" id="linguagens">
+            <h2>LINGUAGENS DE PROGRAMAÇÃO</h2>
+            <p>JavaScript | HTML & CSS | PHP | Python</p>
+        </div>
+        <div class="section" id="experiencias">
+            <h2>EXPERIÊNCIAS</h2><br>
+            <p><strong>Gaplast</strong></p>
+            <p>Estágio em Gestão Empresarial (3 meses)</p>
+            <br>
+            <p><strong>Barbearia São Gabriel</strong></p>
+            <p>Atendimento ao público (3 anos)</p>
+        </div>
+        <div class="section" id="formacoes">
+            <h2>FORMAÇÕES</h2><br>
+            <p>Análise e Desenvolvimento de Sistemas - SENAI</p>
+            <P>Design gráfico - Microcamp</P>
+            <P>Ensino Medio Completo - SESI</P>
+            <p>Informática Avançada - Microcamp</p>
+            <p>Segurança no Trabalho - SENAI</p>
+        </div>
+        <br>
+        <div class="buttons" id="projetos">
+            <a href="https://github.com/augusto8sena/SharknadoProject" target="_blank" class="botao">ACESSAR PROJETOS</a>
+            
+        </div>
+    </div>
+    
+    <footer class="footer" id="contato">
+        <p><a href="mailto:augusto10mile@gmail.com">augusto10mile@gmail.com</a></p>
+        <p>Telefone:(11) 94136-9774</p>
+        <p>Residencial São Gabriel - Salto, SP 13327-462</p>
+    </footer>
+</body>
+</html>

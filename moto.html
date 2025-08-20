@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotoMax - Sua Moto dos Sonhos</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #ff6b35;
+            --secondary-color: #1a1a2e;
+            --accent-color: #16213e;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --background-light: #f8f9fa;
+            --gradient-primary: linear-gradient(135deg, #ff6b35, #f7931e);
+            --gradient-dark: linear-gradient(135deg, #1a1a2e, #16213e);
+            --shadow-light: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-heavy: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(26, 26, 46, 1);
+            box-shadow: var(--shadow-light);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: var(--gradient-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,107,53,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,107,53,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,107,53,0.1)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--text-light);
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: var(--text-light);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-light);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        /* Moto Showcase */
+        .showcase {
+            padding: 5rem 0;
+            background: var(--background-light);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: var(--secondary-color);
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary-color);
+            color: var(--text-light);
+            transform: translateY(-2px);
+        }
+
+        .moto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .moto-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .moto-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .moto-image {
+            height: 250px;
+            background: var(--gradient-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .moto-image::before {
+            content: '🏍️';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            opacity: 0.8;
+        }
+
+        .moto-info {
+            padding: 2rem;
+        }
+
+        .moto-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .moto-specs {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .spec {
+            background: var(--background-light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: var(--gradient-primary);
+            color: var(--text-light);
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-light);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: var(--text-light);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: var(--secondary-color);
+            color: var(--text-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: var(--background-light);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .contact-info h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            width: 30px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: var(--text-light);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .footer-section a {
+            color: var(--text-light);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--secondary-color);
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .mobile-menu.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .mobile-menu.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-menu.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .moto-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                justify-content: center;
+            }
+
+            .filter-btn {
+                font-size: 0.9rem;
+                padding: 0.6rem 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav">
+            <a href="#" class="logo">MotoMax</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#motos">Motos</a></li>
+                <li><a href="#features">Serviços</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content fade-in-up">
+            <h1>Sua Moto dos Sonhos</h1>
+            <p>Descubra nossa coleção exclusiva de motocicletas premium com design inovador e performance excepcional</p>
+            <a href="#motos" class="cta-button">Ver Catálogo</a>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section class="showcase" id="motos">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Nossas Motocicletas</h2>
+            
+            <div class="filters scroll-reveal">
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="sport">Sport</button>
+                <button class="filter-btn" data-filter="cruiser">Cruiser</button>
+                <button class="filter-btn" data-filter="adventure">Adventure</button>
+                <button class="filter-btn" data-filter="naked">Naked</button>
+            </div>
+
+            <div class="moto-grid" id="moto-grid">
+                <!-- Motos serão carregadas dinamicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Por Que Escolher a MotoMax?</h2>
+            <div class="features-grid">
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Garantia Total</h3>
+                    <p>Todas as nossas motos possuem garantia completa de 3 anos com assistência 24h em todo o território nacional.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Manutenção Especializada</h3>
+                    <p>Oficina própria com técnicos certificados e peças originais para manter sua moto sempre em perfeito estado.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Financiamento Facilitado</h3>
+                    <p>Condições especiais de financiamento com as melhores taxas do mercado e parcelamento em até 60x.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>Troca Garantida</h3>
+                    <p>Aceita sua moto usada como parte do pagamento com avaliação justa e transparente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Entre em Contato</h2>
+            <div class="contact-content">
+                <div class="contact-info scroll-reveal">
+                    <h3>Fale Conosco</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Endereço</strong><br>
+                            Rua das Motos, 123 - Centro<br>
+                            São Paulo, SP - 01234-567
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Telefone</strong><br>
+                            (11) 1234-5678<br>
+                            (11) 98765-4321
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong><br>
+                            contato@motomax.com.br<br>
+                            vendas@motomax.com.br
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Horário de Funcionamento</strong><br>
+                            Segunda a Sexta: 8h às 18h<br>
+                            Sábado: 8h às 16h
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form scroll-reveal" id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nome Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="interest">Interesse</label>
+                        <select id="interest" name="interest" required>
+                            <option value="">Selecione uma opção</option>
+                            <option value="compra">Comprar uma moto</option>
+                            <option value="venda">Vender minha moto</option>
+                            <option value="financiamento">Informações sobre financiamento</option>
+                            <option value="manutencao">Serviços de manutenção</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MotoMax</h3>
+                    <p>Há mais de 20 anos realizando o sonho de ter a moto perfeita. Qualidade, confiança e paixão por motocicletas.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Produtos</h3>
+                    <a href="#">Motos Sport</a>
+                    <a href="#">Motos Cruiser</a>
+                    <a href="#">Motos Adventure</a>
+                    <a href="#">Motos Naked</a>
+                    <a href="#">Acessórios</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Serviços</h3>
+                    <a href="#">Financiamento</a>
+                    <a href="#">Seguro</a>
+                    <a href="#">Manutenção</a>
+                    <a href="#">Troca</a>
+                    <a href="#">Garantia</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Suporte</h3>
+                    <a href="#">Central de Ajuda</a>
+                    <a href="#">Fale Conosco</a>
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MotoMax. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="moto-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <div id="modal-body">
+                <!-- Conteúdo será carregado dinamicamente -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados das motos
+        const motos = [
+            {
+                id: 1,
+                name: "Thunder Sport 1000",
+                category: "sport",
+                price: "R$ 45.900",
+                specs: ["1000cc", "150cv", "6 marchas"],
+                description: "Potência extrema para os amantes da velocidade. Motor de alta performance com tecnologia de ponta."
+            },
+            {
+                id: 2,
+                name: "Cruiser Classic 800",
+                category: "cruiser",
+                price: "R$ 38.500",
+                specs: ["800cc", "95cv", "5 marchas"],
+                description: "Estilo clássico americano com conforto incomparável para longas viagens."
+            },
+            {
+                id: 3,
+                name: "Adventure Pro 1200",
+                category: "adventure",
+                price: "R$ 52.800",
+                specs: ["1200cc", "125cv", "6 marchas"],
+                description: "Preparada para qualquer terreno. A companheira perfeita para suas aventuras."
+            },
+            {
+                id: 4,
+                name: "Urban Naked 600",
+                category: "naked",
+                price: "R$ 28.900",
+                specs: ["600cc", "85cv", "6 marchas"],
+                description: "Design arrojado e agilidade urbana. Perfeita para o dia a dia na cidade."
+            },
+            {
+                id: 5,
+                name: "Racer Sport 750",
+                category: "sport",
+                price: "R$ 41.200",
+                specs: ["750cc", "135cv", "6 marchas"],
+                description: "Equilíbrio perfeito entre potência e controle para pilotos experientes."
+            },
+            {
+                id: 6,
+                name: "Touring Cruiser 1100",
+                category: "cruiser",
+                price: "R$ 49.900",
+                specs: ["1100cc", "105cv", "6 marchas"],
+                description: "Máximo conforto para longas jornadas com estilo inconfundível."
+            }
+        ];
+
+        // DOM Elements
+        const header = document.getElementById('header');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const motoGrid = document.getElementById('moto-grid');
+        const modal = document.getElementById('moto-modal');
+        const modalClose = document.getElementById('modal-close');
+        const modalBody = document.getElementById('modal-body');
+        const contactForm = document.getElementById('contact-form');
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on links
+        navMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                mobileMenu.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Render motos
+        function renderMotos(motosToRender = motos) {
+            motoGrid.innerHTML = '';
+            motosToRender.forEach(moto => {
+                const motoCard = document.createElement('div');
+                motoCard.className = 'moto-card scroll-reveal';
+                motoCard.innerHTML = `
+                    <div class="moto-image"></div>
+                    <div class="moto-info">
+                        <h3>${moto.name}</h3>
+                        <div class="moto-specs">
+                            ${moto.specs.map(spec => `<span class="spec">${spec}</span>`).join('')}
+                        </div>
+                        <div class="price">${moto.price}</div>
+                        <p>${moto.description}</p>
+                        <div class="card-actions">
+                            <button class="btn-primary" onclick="openMotoModal(${moto.id})">Ver Detalhes</button>
+                            <button class="btn-secondary" onclick="contactAboutMoto('${moto.name}')">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                motoGrid.appendChild(motoCard);
+            });
+            
+            // Trigger scroll animations for new elements
+            setTimeout(scrollReveal, 100);
+        }
+
+        // Filter functionality
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                let filteredMotos = motos;
+                
+                if (filter !== 'all') {
+                    filteredMotos = motos.filter(moto => moto.category === filter);
+                }
+                
+                // Add fade out effect
+                motoGrid.style.opacity = '0';
+                motoGrid.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    renderMotos(filteredMotos);
+                    motoGrid.style.opacity = '1';
+                    motoGrid.style.transform = 'translateY(0)';
+                }, 300);
+            });
+        });
+
+        // Modal functionality
+        function openMotoModal(motoId) {
+            const moto = motos.find(m => m.id === motoId);
+            if (!moto) return;
+
+            modalBody.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="height: 200px; background: var(--gradient-primary); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                        <span style="font-size: 5rem; opacity: 0.8;">🏍️</span>
+                    </div>
+                    <h2 style="color: var(--secondary-color); margin-bottom: 1rem;">${moto.name}</h2>
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap;">
+                        ${moto.specs.map(spec => `<span class="spec" style="background: var(--background-light); padding: 0.5rem 1rem; border-radius: 20px;">${spec}</span>`).join('')}
+                    </div>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary-color); margin-bottom: 2rem;">${moto.price}</div>
+                    <p style="margin-bottom: 2rem; line-height: 1.6;">${moto.description}</p>
+                    
+                    <div style="background: var(--background-light); padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: var(--secondary-color);">Especificações Técnicas</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: left;">
+                            <div><strong>Motor:</strong> ${moto.specs[0]}</div>
+                            <div><strong>Potência:</strong> ${moto.specs[1]}</div>
+                            <div><strong>Transmissão:</strong> ${moto.specs[2]}</div>
+                            <div><strong>Categoria:</strong> ${moto.category.charAt(0).toUpperCase() + moto.category.slice(1)}</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <button class="btn-primary" style="padding: 1rem 2rem;" onclick="contactAboutMoto('${moto.name}'); closeModal();">
+                            <i class="fas fa-phone" style="margin-right: 0.5rem;"></i>
+                            Entrar em Contato
+                        </button>
+                        <button class="btn-secondary" style="padding: 1rem 2rem;" onclick="scheduleTestDrive('${moto.name}');">
+                            <i class="fas fa-calendar" style="margin-right: 0.5rem;"></i>
+                            Agendar Test Drive
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Add animation
+            setTimeout(() => {
+                modal.querySelector('.modal-content').style.transform = 'translate(-50%, -50%) scale(1)';
+                modal.querySelector('.modal-content').style.opacity = '1';
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Contact functions
+        function contactAboutMoto(motoName) {
+            const contactSection = document.getElementById('contact');
+            const messageField = document.getElementById('message');
+            const interestField = document.getElementById('interest');
+            
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+            
+            setTimeout(() => {
+                interestField.value = 'compra';
+                messageField.value = `Olá! Tenho interesse na ${motoName}. Gostaria de receber mais informações sobre preço, financiamento e disponibilidade.`;
+                messageField.focus();
+            }, 1000);
+        }
+
+        function scheduleTestDrive(motoName) {
+            alert(`Test drive agendado para ${motoName}! Em breve entraremos em contato para confirmar horário e data.`);
+            closeModal();
+        }
+
+        // Form handling
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+            
+            // Simple validation
+            if (!data.name || !data.email || !data.phone || !data.message) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(data.email)) {
+                alert('Por favor, insira um email válido.');
+                return;
+            }
+            
+            // Success animation
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.style.background = '#28a745';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                submitBtn.textContent = 'Mensagem Enviada!';
+                submitBtn.innerHTML = '<i class="fas fa-check" style="margin-right: 0.5rem;"></i>Mensagem Enviada!';
+                
+                setTimeout(() => {
+                    contactForm.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                    alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                }, 2000);
+            }, 1500);
+        });
+
+        // Scroll reveal animation
+        function scrollReveal() {
+            const reveals = document.querySelectorAll('.scroll-reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('revealed');
+                }
+            });
+        }
+
+        // Scroll event listener
+        window.addEventListener('scroll', scrollReveal);
+
+        // Advanced interactions
+        function addAdvancedInteractions() {
+            // Parallax effect for hero section
+            const hero = document.querySelector('.hero');
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+                hero.style.transform = `translateY(${rate}px)`;
+            });
+
+            // Hover effects for moto cards
+            document.addEventListener('mouseover', (e) => {
+                if (e.target.closest('.moto-card')) {
+                    const card = e.target.closest('.moto-card');
+                    card.style.transform = 'translateY(-15px) scale(1.02)';
+                }
+            });
+
+            document.addEventListener('mouseout', (e) => {
+                if (e.target.closest('.moto-card')) {
+                    const card = e.target.closest('.moto-card');
+                    card.style.transform = '';
+                }
+            });
+
+            // Add floating animation to CTA button
+            const ctaButton = document.querySelector('.cta-button');
+            if (ctaButton) {
+                setInterval(() => {
+                    ctaButton.style.transform = 'translateY(-3px)';
+                    setTimeout(() => {
+                        ctaButton.style.transform = '';
+                    }, 1000);
+                }, 3000);
+            }
+
+            // Add typing effect to hero title
+            const heroTitle = document.querySelector('.hero h1');
+            if (heroTitle) {
+                const text = heroTitle.textContent;
+                heroTitle.textContent = '';
+                let i = 0;
+                
+                const typeWriter = () => {
+                    if (i < text.length) {
+                        heroTitle.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 100);
+                    }
+                };
+                
+                setTimeout(typeWriter, 1000);
+            }
+        }
+
+        // Loading animation
+        function showLoadingAnimation() {
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.innerHTML = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--secondary-color); z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                    <div style="font-size: 4rem; margin-bottom: 2rem; animation: bounce 1s infinite;">🏍️</div>
+                    <div style="color: var(--primary-color); font-size: 2rem; font-weight: bold;">MotoMax</div>
+                    <div style="color: white; margin-top: 1rem;">Carregando...</div>
+                </div>
+                <style>
+                    @keyframes bounce {
+                        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+                        40% { transform: translateY(-30px); }
+                        60% { transform: translateY(-15px); }
+                    }
+                </style>
+            `;
+            
+            document.body.appendChild(loadingOverlay);
+            
+            setTimeout(() => {
+                loadingOverlay.style.opacity = '0';
+                loadingOverlay.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    document.body.removeChild(loadingOverlay);
+                }, 500);
+            }, 2000);
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            showLoadingAnimation();
+            renderMotos();
+            scrollReveal();
+            addAdvancedInteractions();
+            
+            // Add some dynamic content
+            setTimeout(() => {
+                const heroContent = document.querySelector('.hero-content');
+                if (heroContent) {
+                    const stats = document.createElement('div');
+                    stats.innerHTML = `
+                        <div style="display: flex; justify-content: center; gap: 3rem; margin-top: 3rem; flex-wrap: wrap;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" data-count="500">0</div>
+                                <div style="opacity: 0.8;">Motos Vendidas</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" data-count="20">0</div>
+                                <div style="opacity: 0.8;">Anos de Experiência</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" data-count="1000">0</div>
+                                <div style="opacity: 0.8;">Clientes Satisfeitos</div>
+                            </div>
+                        </div>
+                    `;
+                    heroContent.appendChild(stats);
+                    
+                    // Animate counters
+                    const counters = stats.querySelectorAll('[data-count]');
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.getAttribute('data-count'));
+                        let current = 0;
+                        const increment = target / 100;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            counter.textContent = Math.floor(current) + '+';
+                        }, 50);
+                    });
+                }
+            }, 3000);
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                closeModal();
+            }
+        });
+
+        // Add search functionality
+        function addSearchFeature() {
+            const searchContainer = document.createElement('div');
+            searchContainer.innerHTML = `
+                <div style="text-align: center; margin: 2rem 0;">
+                    <input type="text" id="moto-search" placeholder="Pesquisar motos..." 
+                           style="padding: 1rem 2rem; border: 2px solid var(--primary-color); border-radius: 25px; font-size: 1rem; width: 300px; max-width: 80%;">
+                </div>
+            `;
+            
+            const filtersElement = document.querySelector('.filters');
+            filtersElement.parentNode.insertBefore(searchContainer, filtersElement.nextSibling);
+            
+            const searchInput = document.getElementById('moto-search');
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredMotos = motos.filter(moto => 
+                    moto.name.toLowerCase().includes(searchTerm) ||
+                    moto.category.toLowerCase().includes(searchTerm) ||
+                    moto.specs.some(spec => spec.toLowerCase().includes(searchTerm))
+                );
+                
+                motoGrid.style.opacity = '0';
+                setTimeout(() => {
+                    renderMotos(filteredMotos);
+                    motoGrid.style.opacity = '1';
+                }, 200);
+            });
+        }
+
+        // Add search feature after DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(addSearchFeature, 100);
+        });
+    </script>
+</body>
+</html>
