@@ -15,9 +15,15 @@ import exerc09 from './components/exerc/exerc09.vue';
 import exerc10 from './components/exerc/exerc10.vue';
 import Exemplo06 from './components/exemplos/Exemplo06Classe.vue';
 import exerc11 from './components/exerc/exerc11.vue';
+import Exemplo07 from './components/exemplos/Exemplo07Click.vue';
+import exerc12 from './components/exerc/exerc12.vue';
+import Exemplo08 from './components/exemplos/Exemplo08Keyboard.vue';
+import exerc13 from './components/exerc/exerc13.vue';
+import Exemplo09 from './components/exemplos/Exemplo09Form.vue';
 </script>
 
 <template>
-<exerc11></exerc11>
+<exerc13></exerc13>
+
 
 </template>

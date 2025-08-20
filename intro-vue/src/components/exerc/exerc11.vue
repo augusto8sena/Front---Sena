@@ -24,19 +24,19 @@ function mudarEstado() {
 </script>
 
 <template>
-  
+ 
     <p :class="{
       'ativo': estado.ativo,
       'inativo': estado.inativo,
       'carregando': estado.carregando
     }">
-      
+     
       <strong>
         {{ estado.ativo ? "Ativo" : estado.inativo ? "Inativo" : "Carregando..." }}
       </strong>
     </p>
 
-    <button 
+    <button
       :disabled="estado.carregando"
       @click="mudarEstado"
       :class="{
