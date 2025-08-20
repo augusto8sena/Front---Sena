@@ -13,10 +13,11 @@ import Exemplo05 from './components/exerc/Exemplo05mode.vue';
 import exerc08 from './components/exerc/exerc08.vue';
 import exerc09 from './components/exerc/exerc09.vue';
 import exerc10 from './components/exerc/exerc10.vue';
+import Exemplo06 from './components/exerc/Exemplo06Classe.vue';
+import exerc11 from './components/exerc/exerc11.vue';
 </script>
 
 <template>
+<exerc11></exerc11>
 
-<exerc09></exerc09>
-<exerc10></exerc10>
 </template>
