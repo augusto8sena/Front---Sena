@@ -20,10 +20,26 @@ import exerc12 from './components/exerc/exerc12.vue';
 import Exemplo08 from './components/exemplos/Exemplo08Keyboard.vue';
 import exerc13 from './components/exerc/exerc13.vue';
 import Exemplo09 from './components/exemplos/Exemplo09Form.vue';
+import UserCard from './components/exemplos/Exemplo10Props.vue';
+import ProductCard from './components/exerc/exerc14.vue';
+
+
+const product = {
+    titulo: "Mac Book Pro",
+    preco: 199.90,
+    imagemUrl: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+    emEstoque: true
+}
 </script>
 
 <template>
-<exerc13></exerc13>
 
+<ProductCard
+    :titulo="product.titulo"
+    :preco="product.preco"
+    :imagemUrl="product.imagemUrl"
+    :emEstoque="product.emEstoque"
+/>
 
 </template>
+
