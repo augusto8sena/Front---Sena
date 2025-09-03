@@ -1,0 +1,101 @@
+/* Reset básico */
+body {
+  background: #121212;
+  margin: 0;
+  font-family: 'Montserrat', 'Segoe UI', Verdana, Geneva, Tahoma, Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: #181c24;
+  padding: 1.2rem 2rem;
+  margin-bottom: 2rem;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 2px 12px #0004;
+}
+.brand {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #4fc3f7;
+  letter-spacing: 2px;
+  margin-right: 2rem;
+  font-family: 'Montserrat', 'Segoe UI', Verdana, Geneva, Tahoma, sans-serif;
+}
+.nav-link {
+  color: #eee;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-link.router-link-exact-active,
+.nav-link:hover {
+  background: #263043;
+  color: #4fc3f7;
+}
+
+/* Home */
+.home-container {
+  background: #181c24;
+  color: #e0e0e0;
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  max-width: 520px;
+  margin: 3rem auto 0 auto;
+  text-align: center;
+  box-shadow: 0 4px 24px #0006;
+}
+.home-container h1 {
+  color: #4fc3f7;
+  font-size: 2.5rem;
+  margin-bottom: 1.2rem;
+  font-family: 'Montserrat', 'Segoe UI', Verdana, Geneva, Tahoma, sans-serif;
+  letter-spacing: 2px;
+}
+.home-container p {
+  font-size: 1.2rem;
+  color: #b0bec5;
+}
+
+/* Produtos e mensagem de alarme */
+.produtos-container {
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  padding-bottom: 2rem;
+}
+.produtos-container h2 {
+  color: #4fc3f7;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.msg-alarme {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(90deg, #ffffff 0%, #38f9d7 100%);
+  color: #181c24;
+  padding: 1.5rem 3rem;
+  border-radius: 18px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 6px 32px #000a;
+  font-size: 1.5rem;
+  z-index: 9999;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  animation: fadeInOut 2.5s;
+  border: 2px solid #ffffff;
+  letter-spacing: 1px;
+}
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, -60%);}
+  10% { opacity: 1; transform: translate(-50%, -50%);}
+  90% { opacity: 1; transform: translate(-50%, -50%);}
+  100% { opacity: 0; transform: translate(-50%, -40%);}
+}
